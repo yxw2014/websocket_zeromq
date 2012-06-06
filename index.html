@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="http://cdn.socket.io/stable/socket.io.js"></script>
+  <script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
+  <script>
+    window.onload = function() {
+
+        var s = new io.Socket('localhost', {port: 8001, rememberTransport: false});
+        s.connect();
+
+        s.addEvent('connect', function() {
+            $("#chat").append("<div>Connected!</div>");
+        });
+
+        s.addEvent('message', function(data) {
+            $("#chat").append("<div>" + data + "</div>");
+        });
+
+    };
+</script>
+</head>
+<body>
+<h3>0MQ - WebSocket test</h3>
+<div id="chat" style="width: 60em; height: 20em; overflow:auto; border: 1px solid black">
+</div>
+</body>
+</html>
